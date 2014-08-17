@@ -186,24 +186,6 @@ act$isWeekday<-ifelse(act$weekday=="Sonntag" | act$weekday=="Samstag","weekend",
 library(lattice)
 #calculate the mean value
 act[,wd_mean:=mean(steps,na.rm=TRUE),by=c("isWeekday","interval")]
-```
-
-```
-##        steps       date interval weekday isWeekday wd_mean
-##     1:    NA 2012-10-01        0  Montag   weekday  2.3333
-##     2:    NA 2012-10-01        5  Montag   weekday  0.4615
-##     3:    NA 2012-10-01       10  Montag   weekday  0.1795
-##     4:    NA 2012-10-01       15  Montag   weekday  0.2051
-##     5:    NA 2012-10-01       20  Montag   weekday  0.1026
-##    ---                                                    
-## 17564:    NA 2012-11-30     2335 Freitag   weekday  1.8718
-## 17565:    NA 2012-11-30     2340 Freitag   weekday  2.0769
-## 17566:    NA 2012-11-30     2345 Freitag   weekday  0.2051
-## 17567:    NA 2012-11-30     2350 Freitag   weekday  0.3077
-## 17568:    NA 2012-11-30     2355 Freitag   weekday  1.4615
-```
-
-```r
 xyplot(act$wd_mean ~ act$interval | act$isWeekday, layout = c(1, 2), type="l")
 ```
 
