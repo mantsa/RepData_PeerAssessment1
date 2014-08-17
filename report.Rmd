@@ -1,0 +1,35 @@
+Reproducible Research Report
+============================================
+
+# Reproducible Research: Peer Assessment 1
+This ist the report of my approach how I processed and analyzed the data for the first peer assignment of COursera course 'Reproducible Research'.
+
+## Loading and processing the data 
+
+The used is available under the following [link] (https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip). After the data is loaded you need to unzip the archive file and load the contained csv-file 'activity.csv'
+
+```{r}
+act<-read.csv("activity.csv")
+dim(act)
+summary(act)
+head(act)
+```
+
+## What is mean total number of steps taken per day?
+
+1 Make a histogram of the total number of steps taken each day
+```{r}
+t_st<-tapply(act$steps,act$date,FUN=function(x) sum(x,na.rm=TRUE))
+plot(t_st,col="red",type="S",xaxt="n",bg="blue",main="Total number of steps",
+                xlab="Date",ylab="Totals")
+axis(1, at=seq(1, 61, by=1),labels=names(t_st))
+day_totals<-data.frame(day=names(t_st),total_steps=t_st)
+```
+
+2 Calculate and report the mean and median total number of steps taken per day
+```{r}
+mean_steps<-mean(day_totals$total_steps,na.rm=TRUE)
+median_steps<-median(day_totals$total_steps,na.rm=TRUE)
+```
+
+The mean total number of steps taken per day is `r mean_steps` and the median is equal to `r median_steps`.
